@@ -5,24 +5,28 @@ import { CardMessage } from "./CardMessage";
 export const ListMessage = () => {
   const apiUrl = "https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts";
   const [messageList, setMessageList] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMessages = async () => {
+      console.log("Fetching");
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        setMessageList(data);
-        console.log(messageList);
+        setMessageList(() => data); //  Function stopped state from updating twice
+        if (data) {
+          // Make sure "data" is actually fetched before render
+          setIsLoading(false);
+        }
       } catch (error) {
         console.error("Error Message:", error);
       }
     };
-
     const fetchInterval = () => {
-      setInterval(fetchMessages, 10000);
+      setInterval(fetchMessages, 5000);
     };
     fetchMessages();
-    fetchInterval();
+    // fetchInterval();
 
     return () => {
       // Clear the interval when the component unmounts
@@ -30,13 +34,18 @@ export const ListMessage = () => {
     };
   }, []);
 
+  // console.log("Fetching data");
+
   return (
     <div className="list-wrapper">
       {/* map */}
-      {messageList &&
+      {!isLoading ? (
         messageList.map((message) => {
           return <CardMessage message={message} />;
-        })}
+        })
+      ) : (
+        <p>Loading....</p>
+      )}
     </div>
   );
 };
