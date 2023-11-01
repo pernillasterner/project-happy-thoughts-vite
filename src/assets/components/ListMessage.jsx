@@ -39,12 +39,12 @@ export const ListMessage = () => {
   return (
     <div className="list-wrapper">
       {/* map */}
-      {!isLoading ? (
+      {isLoading ? (
+        <p>Loading....</p>
+      ) : (
         messageList.map((message) => {
           return <CardMessage message={message} />;
         })
-      ) : (
-        <p>Loading....</p>
       )}
     </div>
   );
