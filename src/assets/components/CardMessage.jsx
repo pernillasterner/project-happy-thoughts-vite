@@ -2,7 +2,7 @@ import "./CardMessage.scss";
 
 export const CardMessage = ({ message }) => {
   return (
-    <div key={message._id} className="message">
+    <div className="message">
       <p>{message.message}</p>
       <div className="info-wrapper">
         <div className="info-like">
