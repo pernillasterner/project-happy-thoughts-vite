@@ -49,6 +49,7 @@ export const PostMessage = ({ setMessageList }) => {
           id="submitPostBtn"
           type="submit"
           aria-label="button for submitting your post"
+          disabled={textValue.length < 6 || textValue.length > 140}
         >
           <span className="emoji" aria-label="heart emoji">
             ❤️
