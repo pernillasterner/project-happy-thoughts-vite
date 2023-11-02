@@ -1,26 +1,30 @@
 import { useState } from "react";
 import "./CardMessage.scss";
 
-export const CardMessage = ({ message }) => {
+export const CardMessage = ({ message, setLikeCount }) => {
   const apiUrl = `https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts/${message._id}/like`;
-  // Set state for the number of hearts in each thought
   const [numberOfLikes, setNumberOfLikes] = useState(message.hearts);
 
-  // Take the state of currentLikes in the parent component and
-
-  // Add function that updates the API with the ID & updates the
+  const storeLocalLike = () => {
+    if (localStorage.likes) {
+      localStorage.likes = parseInt(localStorage.likes) + 1;
+    } else {
+      localStorage.likes = 1;
+    }
+    setLikeCount((likeCount) => likeCount++);
+  };
 
   const likeThought = async () => {
     try {
       const response = await fetch(apiUrl, { method: "POST" });
       if (response.ok) {
         setNumberOfLikes((previousLikes) => previousLikes + 1);
+        setLikeCount((previousLikes) => previousLikes + 1);
+        storeLocalLike();
       } else {
         throw new Error("Could not reach the server. Please try again later");
       }
-    } catch (error) {
-    } finally {
-    }
+    } catch (error) {}
   };
   return (
     <div className="message">
