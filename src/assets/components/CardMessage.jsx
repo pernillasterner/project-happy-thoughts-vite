@@ -11,7 +11,6 @@ export const CardMessage = ({ message, setLikeCount }) => {
     } else {
       localStorage.likes = 1;
     }
-    setLikeCount((likeCount) => likeCount++);
   };
 
   const likeThought = async () => {
@@ -24,7 +23,9 @@ export const CardMessage = ({ message, setLikeCount }) => {
       } else {
         throw new Error("Could not reach the server. Please try again later");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="message">
