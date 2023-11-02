@@ -2,15 +2,17 @@ import { useState, useEffect } from "react";
 import "./ListMessage.scss";
 import { CardMessage } from "./CardMessage";
 import { PostMessage } from "./PostMessage";
+import { LikeMessage } from "./LikeMessage";
 
 export const ListMessage = () => {
   const apiUrl = "https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts";
   const [messageList, setMessageList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [likeCount, setLikeCount] = useState(parseInt(localStorage.likes) || 0);
 
   useEffect(() => {
     const fetchMessages = async () => {
-      console.log("Fetching");
+      // console.log("Fetching");
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -35,16 +37,23 @@ export const ListMessage = () => {
     };
   }, []);
 
-  console.log(messageList);
+  // console.log(messageList);
 
   return (
     <div className="list-wrapper">
       <PostMessage setMessageList={setMessageList} />
+      <LikeMessage likeCount={likeCount} />
       {isLoading ? (
         <p>Loading....</p>
       ) : (
         messageList?.map((message) => {
-          return <CardMessage key={message._id} message={message} />;
+          return (
+            <CardMessage
+              key={message._id}
+              message={message}
+              setLikeCount={setLikeCount}
+            />
+          );
         })
       )}
     </div>
