@@ -12,12 +12,10 @@ export const PostMessage = ({ setMessageList }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // check amount of characters (5 - 140 characters long message) - log the error message
-
     fetch(apiUrl, {
       method: "POST",
       body: JSON.stringify({ message: textValue }),
-      headers: { "Content-Type": "application/json" }, //The post doesnt work without this
+      headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((newMessage) => {
@@ -41,13 +39,12 @@ export const PostMessage = ({ setMessageList }) => {
           onChange={(e) => setTextValue(e.target.value)}
         />
         <div className="post-length">
-          {/* TODO: Add error message */}
           <p className="error">
             {textValue.length < 6
-              ? "Your thought is too short, it needs to be at least 5 characters"
+              ? "Your thought is too short 😒, it needs to be at least 5 characters."
               : textValue.length > 140
-              ? "Your thought is too long, it can be maximum 140 characters"
-              : "We can't wait to hear your thought!"}
+              ? "Your thought is too long 🤨, it can be maximum 140 characters."
+              : "We can't wait to hear your thought! 😃"}
           </p>
           <p className={tooLong ? "tooLong" : "length"}>
             {textValue.length}/{maxTextLength}
