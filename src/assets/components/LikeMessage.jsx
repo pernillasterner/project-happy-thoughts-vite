@@ -13,3 +13,11 @@
 // 10 minutes ago
 // about 1 hour ago
 // about 2 hours ago
+
+export const LikeMessage = ({ likeCount }) => {
+  return (
+    <div>
+      <h2>Stats: You have ❤️ {likeCount} posts</h2>
+    </div>
+  );
+};
