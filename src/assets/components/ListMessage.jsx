@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./ListMessage.scss";
 import { CardMessage } from "./CardMessage";
+import { PostMessage } from "./PostMessage";
 
 export const ListMessage = () => {
   const apiUrl = "https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts";
@@ -34,16 +35,16 @@ export const ListMessage = () => {
     };
   }, []);
 
-  // console.log("Fetching data");
+  console.log(messageList);
 
   return (
     <div className="list-wrapper">
-      {/* map */}
+      <PostMessage setMessageList={setMessageList} />
       {isLoading ? (
         <p>Loading....</p>
       ) : (
-        messageList.map((message) => {
-          return <CardMessage message={message} />;
+        messageList?.map((message) => {
+          return <CardMessage key={message._id} message={message} />;
         })
       )}
     </div>
