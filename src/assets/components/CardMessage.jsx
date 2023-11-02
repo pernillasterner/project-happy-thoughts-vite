@@ -1,3 +1,5 @@
+import "./CardMessage.scss";
+
 export const CardMessage = ({ message }) => {
   return (
     <div key={message._id} className="message">
@@ -9,7 +11,7 @@ export const CardMessage = ({ message }) => {
               ❤️
             </span>
           </button>
-          <span className="num-likes">x {message.hearts}</span>
+          <span className="num-likes"> x {message.hearts}</span>
         </div>
         <div className="info-time">less than a minute ago</div>
       </div>

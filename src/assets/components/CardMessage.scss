@@ -1,0 +1,28 @@
+.message {
+    border: 1px solid black;
+    max-width: 400px;
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    font-family: 'Roboto Mono', monospace;
+    box-shadow: 7px 7px;
+}
+.info-wrapper {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+    align-items: center;
+   
+}
+.like-button {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    border: none;
+    background-color:rgb(205, 201, 201);
+    color: red;
+}
+.num-likes, .info-time {
+    opacity: 0.5;
+}
