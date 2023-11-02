@@ -6,6 +6,7 @@ export const PostMessage = ({ setMessageList }) => {
   const apiUrl = "https://happy-thoughts-ux7hkzgmwa-uc.a.run.app/thoughts";
   const [textValue, setTextValue] = useState("");
   const maxTextLength = 140;
+  const tooLong = textValue.length > 140;
 
   // POST a message to the API
   const handleSubmit = (event) => {
@@ -26,10 +27,6 @@ export const PostMessage = ({ setMessageList }) => {
     setTextValue("");
   };
 
-  // const handleTextChange = (event) => {
-
-  // }
-
   return (
     <div className="post-wrapper">
       <h2>Make a form that will take in a thought</h2>
@@ -45,8 +42,14 @@ export const PostMessage = ({ setMessageList }) => {
         />
         <div className="post-length">
           {/* TODO: Add error message */}
-          <p className="error">Error message</p>
-          <p className="length">
+          <p className="error">
+            {textValue.length < 6
+              ? "Your thought is too short, it needs to be at least 5 characters"
+              : textValue.length > 140
+              ? "Your thought is too long, it can be maximum 140 characters"
+              : "We can't wait to hear your thought!"}
+          </p>
+          <p className={tooLong ? "tooLong" : "length"}>
             {textValue.length}/{maxTextLength}
           </p>
         </div>
